@@ -16,8 +16,9 @@ Assuming all the `value`s used in the example are of type `Number`,
 6. `hasTail`
 7. `peek`
 8. `search`
-9. `reverse`
-10. `size`
+9. `remove`
+10. `reverse`
+11. `size`
 
 ## Implementations
 

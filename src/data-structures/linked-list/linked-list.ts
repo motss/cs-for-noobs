@@ -1,25 +1,109 @@
 declare type LinkedListNode = import('./linked-list-node').LinkedListNode | null;
-declare type PushFn = (value: number) => LinkedList;
-declare type PopFn = () => LinkedListNode;
-declare type ShiftFn = PushFn;
-declare type UnshiftFn = PopFn;
-declare type HasHeadFn = () => boolean;
-declare type HasTailFn = HasHeadFn;
-declare type PeekFn = PopFn;
+declare type AcceptValueOutputLinkedListFn = (value: number) => LinkedList;
+declare type AcceptNoneOutputLinkedListNodeFn = () => LinkedListNode;
+declare type AcceptNoneOutputBooleanFn = () => boolean;
 declare interface LinkedList {
   tail: LinkedListNode;
   head: LinkedListNode;
 
-  push: PushFn;
-  pop: PopFn;
-  shift: ShiftFn;
-  unshift: UnshiftFn;
-  hasHead: HasHeadFn;
-  hasTail: HasTailFn;
-  peek: PeekFn;
+  push: AcceptValueOutputLinkedListFn;
+  pop: AcceptNoneOutputLinkedListNodeFn;
+  shift: AcceptValueOutputLinkedListFn;
+  unshift: AcceptNoneOutputLinkedListNodeFn;
+  hasHead: AcceptNoneOutputBooleanFn;
+  hasTail: AcceptNoneOutputBooleanFn;
+  peek: AcceptNoneOutputLinkedListNodeFn;
+  search: AcceptValueOutputLinkedListFn;
+  remove: AcceptValueOutputLinkedListFn;
 }
 
 import { linkedListNode } from './linked-list-node';
+
+// 1
+// prevNode     v
+//              null 5 1 2 3 3 null
+// currentNode       ^
+// 2
+// prevNode          v
+//              null 5 1 2 3 3 null
+// currentNode         ^
+// 3
+// prevNode            v
+//              null 5 1 2 3 3 null
+// currentNode           ^
+// 4
+// prevNode              v--->
+//              null 5 1 2 3 3 null
+// currentNode             x ^
+// 5
+// prevNode              v
+//              null 5 1 2 3 null
+// currentNode             ^
+function remove(ll: LinkedList, value: number): LinkedList {
+  if (ll.head == null) {
+    return ll;
+  }
+
+  let previousNode: LinkedListNode = null;
+  let currentNode: LinkedListNode = ll.head;
+  while (currentNode && currentNode.next) {
+    if (currentNode.value === value) {
+      if (currentNode === ll.head) {
+        currentNode = currentNode.next;
+        ll.head.next = null;
+        ll.head = currentNode;
+        // ll.unshift();
+        continue;
+      }
+
+      if (currentNode === ll.tail) {
+        previousNode!.next = null;
+        ll.tail = previousNode;
+        return ll;
+      }
+
+      // if (previousNode)
+      previousNode!.next = currentNode.next;
+      currentNode.next = null;
+      currentNode = previousNode!.next;
+      continue;
+    }
+
+    previousNode = currentNode;
+    currentNode = currentNode!.next;
+  }
+
+  if (currentNode && currentNode.value === value) {
+    if (currentNode === ll.head) {
+      ll.head = null;
+      ll.tail = null;
+      return ll;
+    }
+
+    // if (currentNode === ll.tail)
+    previousNode!.next = null;
+    ll.tail = previousNode;
+  }
+
+  return ll;
+}
+
+function search(ll: LinkedList, value: number): LinkedListNode {
+  if (ll.head == null) {
+    return null;
+  }
+
+  let currentNode: LinkedListNode = ll.head;
+  while (currentNode && currentNode.next) {
+    if (currentNode.value === value) {
+      return currentNode;
+    }
+
+    currentNode = currentNode.next;
+  }
+
+  return currentNode.value === value ? currentNode : null;
+}
 
 function peek(ll: LinkedList): LinkedListNode {
   return ll.head;
@@ -107,6 +191,8 @@ export function linkedList(): LinkedList {
   ll.hasHead = hasHead.bind(ll, ll);
   ll.hasTail = hasTail.bind(ll, ll);
   ll.peek = peek.bind(ll, ll);
+  ll.search = search.bind(ll, ll);
+  ll.remove = remove.bind(ll, ll);
 
   return ll;
 }

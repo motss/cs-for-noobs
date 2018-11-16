@@ -39,3 +39,19 @@ console.log('[demo] LinkedList#hasHead ', ll.hasHead());
 console.log('[demo] LinkedList#hasTail ', ll.hasTail());
 
 console.log('[demo] LinkedList#peek ', ll.peek());
+
+console.log('[demo] LinkedList#search (not found) ', ll.search(8787));
+console.log('[demo] LinkedList#search (found) ', ll.search(3));
+console.log('[demo] LinkedList#search (found - head) ', ll.search(5));
+
+console.log('[demo] LinkedList#search (not found - null) ', pretty(ll2), ll2.search(6));
+
+ll2.push(6);
+
+console.log('[demo] LinkedList#search (found - head only) ', pretty(ll2), ll2.search(6));
+
+console.log('[demo] LinkedList#remove (before)', pretty(ll));
+
+ll.remove(3);
+
+console.log('[demo] LinkedList#remove (after)', pretty(ll));
