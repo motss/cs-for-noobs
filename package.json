@@ -1,0 +1,45 @@
+{
+  "name": "cs-for-noobs",
+  "version": "0.0.0",
+  "description": "CS for noobs",
+  "keywords": [
+    "algorithm",
+    "cs",
+    "cs-for-noobs",
+    "data structure",
+    "gafa company",
+    "typescript"
+  ],
+  "homepage": "https://github.com/motss/cs-for-noobs",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:motss/cs-for-noobs.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Rong Sen Ng (motss)",
+    "email": "wes.ngrongsen@gmail.com",
+    "url": "https://github.com/motss"
+  },
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts"
+  ],
+  "main": "./dist/index",
+  "module": "./dist/index",
+  "typings": "./dist/index.d.ts",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {
+    "@messageflow/tslint-config": "^1.2.0",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.6"
+  },
+  "engines": {
+    "node": ">= 10.13.0",
+    "npm": ">= 6.4.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
