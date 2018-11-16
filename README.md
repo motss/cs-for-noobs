@@ -6,83 +6,41 @@
 
 <hr />
 
-[![Version][version-badge]][version-url]
-[![Built with lit-element][built-with-lit-element-badge]][built-with-lit-element-url]
-[![MIT License][mit-license-badge]][mit-license-url]
+> If you can't explain it simply, you don't understand it well enough. - Albert Einstein
 
-[![Downloads][downloads-badge]][downloads-url]
-[![Total downloads][total-downloads-badge]][downloads-url]
-[![Packagephobia][packagephobia-badge]][packagephobia-url]
-[![Bundlephobia][bundlephobia-badge]][bundlephobia-url]
+Heavily inspired by [javascript-algorithms][javascript-algorithms-url]. Everything is written in TypeScript plus stupid simple explanation on the details for noobs like you and me. Hope this would make you learn things the fun and easy way.
 
-[![Build Status][travis-badge]][travis-url]
-[![Dependency Status][daviddm-badge]][daviddm-url]
-<!-- [![codecov][codecov-badge]][codecov-url] -->
-<!-- [![Coverage Status][coveralls-badge]][coveralls-url] -->
+## Data structures
 
-[![codebeat badge][codebeat-badge]][codebeat-url]
-[![Codacy Badge][codacy-badge]][codacy-url]
-[![Code of Conduct][coc-badge]][coc-url]
+- 👍 Must have
+- 😝 Good to have
 
-> Better element for the web
+### 👍
 
-## Table of contents
+1. Linked list
+  1. Singly
+  2. Doubly
+2. Stack
+3. Queue
+4. Heap
+5. Hashmap/ Hash table
+6. Priority Queue
 
-- [Table of contents](#table-of-contents)
-- [Pre-requisites](#pre-requisites)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [HTML (w/ native ES modules)](#html-w-native-es-modules)
-  - [JS/ TS file (w/ native ES modules)](#js-ts-file-w-native-es-modules)
-- [License](#license)
+### 😝
 
-## Pre-requisites
+1. Trie
+2. Tree
+  1. Binary Search Tree
+  2. AVL Tree
+  3. Red-Black Tree
+  4. Segment Tree
+  5. Fenwick Tree
+3. Graph
+4. Disjoint set
+5. Bloom Filter
 
-- [Node.js][nodejs-url] >= 10.13.0
-- [NPM][npm-url] >= 6.4.1 ([NPM][npm-url] comes with [Node.js][nodejs-url], no separate installation is required.)
-- (Optional for non-[VS Code][vscode-url] users) [Syntax Highlighting for lit-html in VS Code][vscode-lit-html-url]
+## Algorithms
 
-## Installation
-
-```sh
-# Install via NPM
-$ npm install cs-for-noobs
-```
-
-## Usage
-
-### HTML (w/ native ES modules)
-
-```html
-<!-- For the sake of brevity, the HTML below is just for reference -->
-<!doctype html>
-<html>
-  <head>
-    <!-- Native ES modules -->
-    <script type="module" src="/path/to/my-element.js"></script>
-  </head>
-
-  <body>
-    <!-- Element declaration -->
-    <my-element></my-element>
-  </body>
-</html>
-```
-
-### JS/ TS file (w/ native ES modules)
-
-```ts
-import { html, LitElement } from '@polymer/lit-element';
-import 'cs-for-noobs.js';
-
-class MainApp extends LitElement {
-  protected render() {
-    return html`
-      <my-element></my-element>
-    `;
-  }
-}
-```
 
 ## License
 
@@ -95,6 +53,7 @@ class MainApp extends LitElement {
 [node-releases-url]: https://nodejs.org/en/download/releases
 [vscode-url]: https://code.visualstudio.com/
 [vscode-lit-html-url]: https://github.com/mjbvz/vscode-lit-html
+[javascript-algorithms-url]: https://github.com/trekhleb/javascript-algorithms
 
 <!-- MDN -->
 [array-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
