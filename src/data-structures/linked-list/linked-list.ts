@@ -1,23 +1,122 @@
 declare type LinkedListNode = import('./linked-list-node').LinkedListNode | null;
 declare type AcceptValueOutputLinkedListFn = (value: number) => LinkedList;
-declare type AcceptNoneOutputLinkedListNodeFn = () => LinkedListNode;
-declare type AcceptNoneOutputBooleanFn = () => boolean;
+declare type AcceptNoneOutputTypeFn<T> = () => T;
 declare interface LinkedList {
   tail: LinkedListNode;
   head: LinkedListNode;
 
   push: AcceptValueOutputLinkedListFn;
-  pop: AcceptNoneOutputLinkedListNodeFn;
+  pop: AcceptNoneOutputTypeFn<LinkedListNode>;
   shift: AcceptValueOutputLinkedListFn;
-  unshift: AcceptNoneOutputLinkedListNodeFn;
-  hasHead: AcceptNoneOutputBooleanFn;
-  hasTail: AcceptNoneOutputBooleanFn;
-  peek: AcceptNoneOutputLinkedListNodeFn;
+  unshift: AcceptNoneOutputTypeFn<LinkedListNode>;
+  hasHead: AcceptNoneOutputTypeFn<boolean>;
+  hasTail: AcceptNoneOutputTypeFn<boolean>;
+  peek: AcceptNoneOutputTypeFn<LinkedListNode>;
   search: AcceptValueOutputLinkedListFn;
   remove: AcceptValueOutputLinkedListFn;
+  reverse: AcceptNoneOutputTypeFn<LinkedList>;
+  size: AcceptNoneOutputTypeFn<number>;
 }
 
 import { linkedListNode } from './linked-list-node';
+
+function size(ll: LinkedList): number {
+  if (ll.head == null) {
+    return 0;
+  }
+
+  if (ll.head === ll.tail) {
+    return 1;
+  }
+
+  let len = 0;
+  let currentNode: LinkedListNode = ll.head;
+  while (currentNode && currentNode.next) {
+    len += 1;
+    currentNode = currentNode.next;
+  }
+
+  return len + 1;
+}
+
+// 0
+// nextNode     v
+// prevNode     v
+//              null  5->1->2->3->3->null
+// currentNode        ^
+// while:start
+// 1a
+// nextNode              v
+// prevNode     v
+//              null<-5  1->2->3->3->null
+// currentNode        ^
+// 1b
+// nextNode     v
+// prevNode           v
+//              null<-5  1->2->3->3->null
+// currentNode           ^
+// 2a
+// nextNode                 v
+// prevNode           v
+//              null<-5<-1  2->3->3->null
+// currentNode           ^
+// 2b
+// nextNode     v
+// prevNode              v
+//              null<-5<-1  2->3->3->null
+// currentNode              ^
+// 3a
+// nextNode                    v
+// prevNode              v
+//              null<-5<-1<-2  3->3->null
+// currentNode              ^
+// 3b
+// nextNode     v
+// prevNode                 v
+//              null<-5<-1<-2  3->3->null
+// currentNode                 ^
+// 4a
+// nextNode                       v
+// prevNode                 v
+//              null<-5<-1<-2<-3  3->null
+// currentNode                 ^
+// 4a
+// nextNode     v
+// prevNode                    v
+//              null<-5<-1<-2<-3  3->null
+// currentNode                    ^
+// 4a
+// nextNode     v
+// prevNode                    v
+//              null<-5<-1<-2<-3  3->null
+// currentNode                    ^
+// while:end
+// 5b
+// nextNode     v
+// prevNode                    v
+//              null<-5<-1<-2<-3<-3  null
+// currentNode                    ^
+function reverse(ll: LinkedList): LinkedList {
+  if (ll.head == null || ll.head === ll.tail) {
+    return ll;
+  }
+
+  let previousNode: LinkedListNode = null;
+  let currentNode: LinkedListNode = ll.head;
+  while (currentNode && currentNode.next) {
+    const nextNode = currentNode.next;
+    currentNode.next = previousNode;
+
+    previousNode = currentNode;
+    currentNode = nextNode;
+  }
+
+  currentNode!.next  = previousNode;
+  ll.tail = ll.head;
+  ll.head = currentNode;
+
+  return ll;
+}
 
 // 1
 // prevNode     v
@@ -193,6 +292,8 @@ export function linkedList(): LinkedList {
   ll.peek = peek.bind(ll, ll);
   ll.search = search.bind(ll, ll);
   ll.remove = remove.bind(ll, ll);
+  ll.reverse = reverse.bind(ll, ll);
+  ll.size = size.bind(ll, ll);
 
   return ll;
 }

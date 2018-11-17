@@ -39,4 +39,4 @@ Assuming all the `value`s used in the example are of type `Number`,
 | `peek` | `O(1)` |
 | `search` | `O(n)` |
 | `reverse` | `O(n)` |
-| `size` | `O(1)` |
+| `size` | `O(n)` |
